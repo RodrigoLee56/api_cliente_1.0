@@ -1,33 +1,18 @@
 package br.com.rodrigolee56.cliente.services;
 
-import java.util.List;
+import br.com.rodrigolee56.cliente.controllers.dto.filtro.Clientefiltro;
+import br.com.rodrigolee56.cliente.entities.Cliente;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+public interface ClienteService {
+    Cliente salvar(Cliente cliente);
 
-import br.com.rodrigolee56.cliente.entities.Cliente;
-import br.com.rodrigolee56.cliente.repositories.ClienteRepository;
+    Page<Cliente> listaCliente(Clientefiltro clientefiltro, Pageable pageable);
 
-@Service
-public class ClienteService {
-	
-	@Autowired
-	private ClienteRepository clienteRepository;
-	
-	public Cliente salvar(Cliente cliente) {
-		return clienteRepository.save(cliente);
-	}
-	
-	public List<Cliente> listaCliente() {
-		return clienteRepository.findAll();
-	}
-	
-	public Optional<Cliente> buscarPorId(Long id) {
-		return clienteRepository.findById(id);
-	}
-	
-	public void removePorId(Long id) {
-		clienteRepository.deleteById(id);
-	}
+    Optional<Cliente> buscarPorId(Long id);
+
+    void removePorId(Long id);
 }
